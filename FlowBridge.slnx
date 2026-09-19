@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="FlowBridge.Core/FlowBridge.Core.csproj" />
+  <Project Path="FlowBridge.Infrastructure/FlowBridge.Infrastructure.csproj" />
+  <Project Path="FlowBridge.Tests/FlowBridge.Tests.csproj" />
+  <Project Path="FlowBridge.Web/FlowBridge.Web.csproj" />
+</Solution>

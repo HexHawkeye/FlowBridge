@@ -1,0 +1,9 @@
+@page "{id:long}"
+@model FlowBridge.Web.Pages.Executions.DetailsModel
+@{ ViewData["Title"] = "Execution details"; }
+<div class="page-head"><div><p class="eyebrow">EXECUTION #@Model.Execution.Id</p><h1>@Model.Execution.IntegrationDefinition?.Name</h1></div><a asp-page="/Index">← Dashboard</a></div>
+<div class="stats"><div><small>Result</small><strong class="@(Model.Execution.Succeeded ? "good" : "bad")">@(Model.Execution.Succeeded ? "Success" : "Failed")</strong></div><div><small>HTTP status</small><strong>@(Model.Execution.StatusCode?.ToString() ?? "—")</strong></div><div><small>Duration</small><strong>@Model.Execution.DurationMs ms</strong></div><div><small>Started</small><strong>@Model.Execution.StartedUtc.ToLocalTime().ToString("g")</strong></div></div>
+<section><p>Attempt: <strong>@Model.Execution.AttemptNumber</strong> · Queue state: <strong>@Model.Execution.RetryState</strong>@if(Model.Execution.NextRetryUtc is not null){<text> · Next retry: <strong>@Model.Execution.NextRetryUtc.Value.ToLocalTime().ToString("g")</strong></text>}</p>@if(!Model.Execution.Succeeded){<form method="post" asp-page-handler="Retry"><input type="hidden" name="id" value="@Model.Execution.Id"/><button type="submit">Retry now</button></form>}</section>
+@if (!string.IsNullOrWhiteSpace(Model.Execution.ErrorMessage)) { <section><h2>Error</h2><pre class="error">@Model.Execution.ErrorMessage</pre></section> }
+<section><h2>Request body</h2><pre>@(string.IsNullOrWhiteSpace(Model.Execution.RequestBody) ? "(empty)" : Model.Execution.RequestBody)</pre></section>
+<section><h2>Response body</h2><pre>@(string.IsNullOrWhiteSpace(Model.Execution.ResponseBody) ? "(empty)" : Model.Execution.ResponseBody)</pre></section>

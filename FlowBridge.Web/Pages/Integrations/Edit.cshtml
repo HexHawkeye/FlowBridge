@@ -1,0 +1,53 @@
+@page "{id:int?}"
+@model FlowBridge.Web.Pages.Integrations.EditModel
+@{ ViewData["Title"] = Model.Input.Id == 0 ? "New integration" : "Edit integration"; }
+<div class="page-head"><div><p class="eyebrow"><span id="connector-heading">@Model.Input.ConnectorType.ToUpperInvariant()</span> CONNECTOR</p><h1>@ViewData["Title"]</h1></div><a asp-page="/Index">← Dashboard</a></div>
+<form method="post" action="/integrations/save" class="editor">
+    <input type="hidden" name="Id" value="@Model.Input.Id" />
+    <label>Name<input name="Name" value="@Model.Input.Name" required maxlength="150" placeholder="Send orders to warehouse"/></label>
+    <label>Description<input name="Description" value="@Model.Input.Description" placeholder="What does this integration do?"/></label>
+    <label>Connector type<select id="connector-type" name="ConnectorType"><option selected="@(Model.Input.ConnectorType == "REST")">REST</option><option selected="@(Model.Input.ConnectorType == "GraphQL")">GraphQL</option></select></label>
+    <label>Endpoint URL<input name="Url" value="@Model.Input.Url" type="url" required placeholder="https://api.example.com/orders"/></label>
+    <div id="rest-fields">
+        <label>HTTP method<select name="Method"><option selected="@(Model.Input.Method == "GET")">GET</option><option selected="@(Model.Input.Method == "POST")">POST</option><option selected="@(Model.Input.Method == "PUT")">PUT</option><option selected="@(Model.Input.Method == "PATCH")">PATCH</option><option selected="@(Model.Input.Method == "DELETE")">DELETE</option></select></label>
+    </div>
+    <label>Headers (JSON)<textarea name="HeadersJson" rows="6">@Model.Input.HeadersJson</textarea><small>Example: { "Authorization": "Bearer token", "X-Source": "FlowBridge" }</small></label>
+    <label>Secret headers (encrypted)<textarea name="SecretHeadersJson" rows="5" placeholder="{ &quot;Authorization&quot;: &quot;Bearer secret&quot; }"></textarea><small>Leave blank to keep existing encrypted values. Secrets are never displayed again.</small></label>
+    <label>Template variables (JSON)<textarea name="VariablesJson" rows="6">@Model.Input.VariablesJson</textarea><small>Example: { "shop": "110" }. Use {{shop}}. Built-ins: {{utcNow}}, {{date}}, {{guid}}.</small></label>
+    <div id="rest-body-fields">
+        <h2>REST request</h2>
+        <label>Request body (JSON)<textarea name="BodyTemplate" rows="10" placeholder="{ &quot;message&quot;: &quot;Hello from FlowBridge&quot; }">@Model.Input.BodyTemplate</textarea></label>
+    </div>
+    <div id="graphql-fields">
+        <h2>GraphQL request</h2>
+        <p><small>GraphQL requests are sent using POST automatically.</small></p>
+        <label>Operation name (optional)<input name="GraphQlOperationName" value="@Model.Input.GraphQlOperationName" placeholder="GetCountry"/></label>
+        <label>Query or mutation<textarea name="GraphQlQuery" rows="12" placeholder="query GetCountry($code: ID!) { country(code: $code) { name capital } }">@Model.Input.GraphQlQuery</textarea></label>
+        <label>GraphQL variables (JSON)<textarea name="GraphQlVariablesJson" rows="7">@Model.Input.GraphQlVariablesJson</textarea><small>FlowBridge template values can be used here.</small></label>
+    </div>
+    <label class="check"><input name="IsEnabled" type="checkbox" value="true" checked="@Model.Input.IsEnabled"/> Integration enabled</label>
+    <label class="check"><input name="ScheduleEnabled" type="checkbox" value="true" checked="@Model.Input.ScheduleEnabled"/> Run automatically on a schedule</label>
+    <label>Run every (minutes)<input name="IntervalMinutes" type="number" min="1" max="525600" value="@Model.Input.IntervalMinutes"/></label>
+    <div class="form-row"><label>Maximum retries<input name="MaxRetries" type="number" min="0" max="10" value="@Model.Input.MaxRetries"/></label><label class="grow">Initial retry delay (seconds)<input name="RetryDelaySeconds" type="number" min="5" max="86400" value="@Model.Input.RetryDelaySeconds"/></label></div>
+    <div class="actions"><button type="submit" name="save" value="true">Save integration</button><a asp-page="/Index" class="secondary button">Cancel</a></div>
+</form>
+<script>
+(() => {
+    const selector = document.getElementById('connector-type');
+    const restFields = document.getElementById('rest-fields');
+    const restBodyFields = document.getElementById('rest-body-fields');
+    const graphQlFields = document.getElementById('graphql-fields');
+    const heading = document.getElementById('connector-heading');
+
+    function updateConnectorFields() {
+        const isGraphQl = selector.value === 'GraphQL';
+        restFields.hidden = isGraphQl;
+        restBodyFields.hidden = isGraphQl;
+        graphQlFields.hidden = !isGraphQl;
+        heading.textContent = isGraphQl ? 'GRAPHQL' : 'REST';
+    }
+
+    selector.addEventListener('change', updateConnectorFields);
+    updateConnectorFields();
+})();
+</script>

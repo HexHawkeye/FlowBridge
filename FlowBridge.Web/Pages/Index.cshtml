@@ -1,0 +1,52 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<section class="hero">
+    <div><p class="eyebrow">PHASE 1</p><h1>Connect. Run. Observe.</h1><p>Create REST integrations and inspect every execution from one place.</p></div>
+    <a asp-page="/Integrations/Edit" class="button">+ New integration</a>
+</section>
+@if (!string.IsNullOrWhiteSpace(Model.Notice)) { <div class="notice">@Model.Notice</div> }
+<section>
+    <h2>Integrations</h2>
+    <div class="cards">
+    @if (Model.Integrations.Count == 0) { <div class="empty">No integrations yet. Create your first REST connection.</div> }
+    @foreach (var item in Model.Integrations)
+    {
+        <article class="card">
+            <div class="row"><span class="method">@(item.ConnectorType == "GraphQL" ? "GRAPHQL" : item.Method)</span><span class="status @(item.IsEnabled ? "on" : "off")">@(item.IsEnabled ? "Enabled" : "Paused")</span></div>
+            <h3>@item.Name</h3><p>@item.Description</p><code>@item.Url</code>
+            @if (item.ScheduleEnabled)
+            {
+                <p>Runs every @item.IntervalMinutes min · Next: @(item.NextRunUtc?.ToLocalTime().ToString("g") ?? "pending")</p>
+            }
+            <div class="actions">
+                <form method="post" asp-page="/Index" asp-page-handler="Run">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    @if (item.IsEnabled)
+                    {
+                        <button type="submit">Run now</button>
+                    }
+                    else
+                    {
+                        <button type="button" disabled>Run now</button>
+                    }
+                </form>
+                <a asp-page="/Integrations/Edit" asp-route-id="@item.Id">Edit</a>
+                <form method="post" asp-page-handler="Toggle"><input type="hidden" name="id" value="@item.Id"/><button class="secondary">@(item.IsEnabled ? "Pause" : "Enable")</button></form>
+                <form method="post" asp-page-handler="Delete" onsubmit="return confirm('Delete this integration and all of its execution history? This cannot be undone.');"><input type="hidden" name="id" value="@item.Id"/><button type="submit" style="background:#3b1d20;color:#ff9b9b;border:1px solid #74363d">Delete</button></form>
+            </div>
+        </article>
+    }
+    </div>
+</section>
+<section>
+    <h2>Recent executions</h2>
+    <div class="table-wrap"><table><thead><tr><th>Integration</th><th>Started</th><th>Result</th><th>HTTP</th><th>Duration</th><th></th></tr></thead><tbody>
+    @foreach (var run in Model.RecentExecutions)
+    {
+        <tr><td>@run.IntegrationDefinition?.Name <small>Attempt @run.AttemptNumber</small></td><td>@run.StartedUtc.ToLocalTime().ToString("g")</td><td><span class="status @(run.Succeeded ? "on" : "off")">@(run.Succeeded ? "Success" : run.RetryState)</span></td><td>@(run.StatusCode?.ToString() ?? "—")</td><td>@run.DurationMs ms</td><td><a asp-page="/Executions/Details" asp-route-id="@run.Id">View</a></td></tr>
+    }
+    </tbody></table></div>
+</section>

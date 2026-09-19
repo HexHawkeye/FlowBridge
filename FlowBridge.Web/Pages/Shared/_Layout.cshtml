@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] · FlowBridge</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header><a asp-page="/Index" class="brand">⚡ FlowBridge</a><span>Integration control centre</span>@if(User.Identity?.IsAuthenticated == true){<a asp-page="/Logout" style="margin-left:auto">Sign out</a>}</header>
+<main>@RenderBody()</main>
+</body>
+</html>

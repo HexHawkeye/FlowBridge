@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Hawkeye.MONSTER\\Documents\\GitHub\\FlowBridge\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A0972E6A-043E-72B1-9B59-5186F05D6BA3}|FlowBridge.Web\\FlowBridge.Web.csproj|c:\\users\\hawkeye.monster\\documents\\github\\flowbridge\\flowbridge.web\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A0972E6A-043E-72B1-9B59-5186F05D6BA3}|FlowBridge.Web\\FlowBridge.Web.csproj|solutionrelative:flowbridge.web\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Hawkeye.MONSTER\\Documents\\GitHub\\FlowBridge\\FlowBridge.Web\\Pages\\Index.cshtml",
+              "RelativeDocumentMoniker": "FlowBridge.Web\\Pages\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Hawkeye.MONSTER\\Documents\\GitHub\\FlowBridge\\FlowBridge.Web\\Pages\\Index.cshtml",
+              "RelativeToolTip": "FlowBridge.Web\\Pages\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-09-19T21:27:21.645Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

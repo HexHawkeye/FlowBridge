@@ -1,0 +1,25 @@
+services:
+  flowbridge:
+    build: .
+    container_name: flowbridge
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__FlowBridge: Data Source=/data/flowbridge.db
+      DataProtection__KeyPath: /keys
+      Admin__Username: ${FLOWBRIDGE_ADMIN_USERNAME:-admin}
+      Admin__PasswordSha256: ${FLOWBRIDGE_ADMIN_PASSWORD_SHA256}
+    volumes:
+      - flowbridge-data:/data
+      - flowbridge-keys:/keys
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  flowbridge-data:
+  flowbridge-keys:

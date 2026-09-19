@@ -1,0 +1,11 @@
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\bin\Debug\net10.0\FlowBridge.Core.deps.json
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\bin\Debug\net10.0\FlowBridge.Core.dll
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\bin\Debug\net10.0\FlowBridge.Core.pdb
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\obj\Debug\net10.0\FlowBridge.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\obj\Debug\net10.0\FlowBridge.Core.AssemblyInfoInputs.cache
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\obj\Debug\net10.0\FlowBridge.Core.AssemblyInfo.cs
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\obj\Debug\net10.0\FlowBridge.Core.csproj.CoreCompileInputs.cache
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\obj\Debug\net10.0\FlowBridge.Core.dll
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\obj\Debug\net10.0\refint\FlowBridge.Core.dll
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\obj\Debug\net10.0\FlowBridge.Core.pdb
+C:\Users\Hawkeye.MONSTER\Documents\GitHub\FlowBridge\FlowBridge.Core\obj\Debug\net10.0\ref\FlowBridge.Core.dll
